@@ -1,0 +1,10 @@
+glob is i
+prok is v
+pish is x
+tegj is l
+glob glob silver is 34 credits
+1 silver = 17.0 credits
+glob prok gold is 57800 credits
+1 gold = 14450.0 credits
+pish pish iron is 3910 credits
+1 iron = 195.5 credits

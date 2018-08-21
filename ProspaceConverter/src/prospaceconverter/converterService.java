@@ -247,9 +247,11 @@ public class converterService {
     public String convertIntergalacticToRoman(String intergalactic){
         String roman = "";
         String[] item = intergalactic.split(" ", -1);
+        FileHandler aFile = new FileHandler();
         
         for (String currentString : item) {
-            char stringtoChar = convertStringToRoman(currentString);
+            String stringtoChar = aFile.readTextFileIntergalactic(currentString).toUpperCase();
+//            char stringtoChar = convertStringToRoman(currentString);
             roman += stringtoChar;
         }
         if(roman.contains("!")){
@@ -275,8 +277,14 @@ public class converterService {
             query = query.replaceAll("how many credits is", "");
             String [] arQuery = query.split(" ");
             String last = arQuery[arQuery.length-1];
+            FileHandler fileHandler = new FileHandler();
             
-            double credits = convertStringToCredits(last);
+//            double credits = convertStringToCredits(last);
+            String resultReadCredits = fileHandler.readTextFileCredits(last);
+            double credits = 0;
+            if(!resultReadCredits.isEmpty()){
+                credits = Double.parseDouble(fileHandler.readTextFileCredits(last));
+            }
             result = "I have no idea what you are talking about";
             
             if(credits>0){
@@ -288,6 +296,9 @@ public class converterService {
                     result = galacticNum +" "+last+" is "+ calculate + " credits";
                 }
             }
+        }else if(query.contains("is") && !query.contains("\\?")){
+            FileHandler append = new FileHandler();
+            append.doAppendToFile(query+"\n");
         }else{
             result = "I have no idea what you are talking about";
         }
